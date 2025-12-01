@@ -1,0 +1,277 @@
+{
+  "info": {
+    "_postman_id": "banco-microservicios",
+    "name": "Bank System Microservices",
+    "description": "APIs para el Sistema Bancario con Microservicios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Cliente-Persona Service",
+      "item": [
+        {
+          "name": "Obtener todos los clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/clientes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Obtener clientes activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/clientes/activos",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes", "activos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/clientes/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crear nuevo cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Carlos Mendoza\",\n  \"genero\": \"M\",\n  \"edad\": 28,\n  \"identificacion\": \"9876543210\",\n  \"direccion\": \"Calle Principal 456\",\n  \"telefono\": \"0998765432\",\n  \"contrasena\": \"Segura123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/clientes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jose Lema Actualizado\",\n  \"genero\": \"M\",\n  \"edad\": 36,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Nueva direccion\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/clientes/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Cambiar estado del cliente",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/clientes/1/estado?estado=false",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes", "1", "estado"],
+              "query": [
+                {
+                  "key": "estado",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/clientes/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cuenta-Movimiento Service",
+      "item": [
+        {
+          "name": "Obtener todas las cuentas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/cuentas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "cuentas"]
+            }
+          }
+        },
+        {
+          "name": "Crear nueva cuenta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"999888\",\n  \"tipoCuenta\": \"Corriente\",\n  \"saldoInicial\": 5000,\n  \"clienteId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/cuentas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "cuentas"]
+            }
+          }
+        },
+        {
+          "name": "Registrar movimiento - Deposito",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/movimientos/registrar?cuentaId=1&tipoMovimiento=Deposito&valor=500",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "movimientos", "registrar"],
+              "query": [
+                {
+                  "key": "cuentaId",
+                  "value": "1"
+                },
+                {
+                  "key": "tipoMovimiento",
+                  "value": "Deposito"
+                },
+                {
+                  "key": "valor",
+                  "value": "500"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registrar movimiento - Retiro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/movimientos/registrar?cuentaId=1&tipoMovimiento=Retiro&valor=200",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "movimientos", "registrar"],
+              "query": [
+                {
+                  "key": "cuentaId",
+                  "value": "1"
+                },
+                {
+                  "key": "tipoMovimiento",
+                  "value": "Retiro"
+                },
+                {
+                  "key": "valor",
+                  "value": "200"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Obtener movimientos por cuenta",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/movimientos/cuenta/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "movimientos", "cuenta", "1"]
+            }
+          }
+        },
+        {
+          "name": "Estado de Cuenta (Reporte)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/reportes/estado-cuenta?clienteId=1&fechaInicio=2024-01-01&fechaFin=2024-12-31",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["api", "reportes", "estado-cuenta"],
+              "query": [
+                {
+                  "key": "clienteId",
+                  "value": "1"
+                },
+                {
+                  "key": "fechaInicio",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "fechaFin",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
